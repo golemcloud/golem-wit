@@ -1,0 +1,40 @@
+package golem:api
+
+interface host {
+
+    record promise-id {
+        instance-id: instance-id,
+        oplog-idx: s32,
+    }
+
+    record instance-id {
+        component-id: component-id,
+        instance-name: string
+    }
+
+  
+    record component-id {
+        uuid: uuid,
+    }
+
+    record uuid {
+      high-bits: u64,
+      low-bits: u64
+    }
+    
+    record account-id {
+        account-name: string
+    }
+
+    golem-create-promise: func() -> promise-id
+
+    golem-await-promise: func(promise-id: promise-id) -> list<u8>
+
+    golem-complete-promise: func(promise-id: promise-id, data: list<u8>) -> bool
+
+    golem-delete-promise: func(promise-id: promise-id) -> ()
+}
+
+world golem-host {
+    import host
+}
