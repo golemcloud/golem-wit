@@ -3,17 +3,17 @@ package golem:api
 interface host {
 
     record promise-id {
-        instance-id: instance-id,
+        worker-id: worker-id,
         oplog-idx: s32,
     }
 
-    record instance-id {
-        component-id: component-id,
-        instance-name: string
+    record worker-id {
+        template-id: template-id,
+        worker-name: string
     }
 
   
-    record component-id {
+    record template-id {
         uuid: uuid,
     }
 
