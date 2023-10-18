@@ -26,6 +26,10 @@ interface host {
         account-name: string
     }
 
+    record uri {
+        uri: string
+    }
+
     golem-create-promise: func() -> promise-id
 
     golem-await-promise: func(promise-id: promise-id) -> list<u8>
@@ -33,6 +37,8 @@ interface host {
     golem-complete-promise: func(promise-id: promise-id, data: list<u8>) -> bool
 
     golem-delete-promise: func(promise-id: promise-id) -> ()
+
+    get-self-uri: func(function-name: string) -> uri
 }
 
 world golem-host {
