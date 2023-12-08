@@ -53,7 +53,7 @@ interface types {
   /// to the output-stream defined in the `wasi-io` interface.
   // Soon: switch to `resource value { ... }`
   resource outgoing-value {
-    new-outgoing-value: func() -> outgoing-value;
+    new-outgoing-value: static func() -> outgoing-value;
     outgoing-value-write-body: func() -> result<output-stream>;
   }
 
