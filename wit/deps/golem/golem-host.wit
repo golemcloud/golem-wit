@@ -35,7 +35,7 @@ interface host {
     }
 
     /// Configures how the executor retries failures
-    record retry-polcy {
+    record retry-policy {
         /// The maximum number of retries before the worker becomes permanently failed
         max-attempts: u32,
         /// The minimum delay between retries (applied to the first retry)
