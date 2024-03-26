@@ -113,6 +113,11 @@ interface host {
     /// In case of false the executor provides at-most-once semantics, failing the worker in case it is 
     /// not known if the side effect was already executed.
     set-idempotence-mode: func(idempotent: bool) -> ();
+
+    /// Generates an idempotency key. This operation will never be replayed — 
+    /// i.e. not only is this key generated, but it is persisted and committed, such that the key can be used in third-party systems (e.g. payment processing)
+    /// to introduce idempotence.
+    generate-idempotency-key: func() -> uuid;
 }
 
 world golem-host {
