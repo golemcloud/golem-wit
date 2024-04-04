@@ -64,7 +64,9 @@ interface host {
 
     enum string-filter-comparator {
         equal,
-        like
+        not-equal,
+        like,
+        not-like
     }
 
     enum worker-status {
@@ -90,6 +92,7 @@ interface host {
     }
 
     record worker-status-filter {
+        comparator: filter-comparator,
         value: worker-status
     }
 
@@ -121,15 +124,17 @@ interface host {
         filter: worker-filter
     }
 
-    variant worker-filter {
+    variant worker-property-filter {
         name(worker-name-filter),
         status(worker-status-filter),
         version(worker-version-filter),
         created-at(worker-created-at-filter),
-        env(worker-env-filter),
-        and(worker-and-filter),
-        or(worker-or-filter),
-        not(worker-not-filter)
+        env(worker-env-filter)
+    }
+
+    variant worker-filters {
+        or(list<worker-property-filter>),
+        and(list<worker-property-filter>)
     }
 
     record worker-metadata {
@@ -139,6 +144,17 @@ interface host {
         status: worker-status,
         template-version: i32,
         retry-count: i32
+    }
+
+    record workers-metadata-response {
+        workers: list<worker-metadata>,
+        cursor: option<u64>
+    }
+
+    resource get-workers {
+        constructor(template-id: template-id, filter: worker-filter, count: u64, precise: bool);
+
+        get: func(cursor: u64) -> result<workers-metadata-response, string>;
     }
 
     /// Create a new promise
