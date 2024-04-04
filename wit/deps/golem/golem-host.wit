@@ -56,7 +56,7 @@ interface host {
     enum filter-comparator {
         equal,
         not-equal,
-        creater-equal,
+        greater-equal,
         greater,
         less-equal,
         less
