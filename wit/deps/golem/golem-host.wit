@@ -53,6 +53,94 @@ interface host {
         smart
     }
 
+    enum filter-comparator {
+        equal,
+        not-equal,
+        creater-equal,
+        greater,
+        less-equal,
+        less
+    }
+
+    enum string-filter-comparator {
+        equal,
+        like
+    }
+
+    enum worker-status {
+        /// The worker is running an invoked function
+        running,
+        /// The worker is ready to run an invoked function
+        idle,
+        /// An invocation is active but waiting for something (sleeping, waiting for a promise)
+        suspended,
+        /// The last invocation was interrupted but will be resumed
+        interrupted,
+        /// The last invocation failed and a retry was scheduled
+        retrying,
+        /// The last invocation failed and the worker can no longer be used
+        failed,
+        /// The worker exited after a successful invocation and can no longer be invoked
+        exited,
+    }
+
+    record worker-name-filter {
+        comparator: string-filter-comparator,
+        value: string
+    }
+
+    record worker-status-filter {
+        value: worker-status
+    }
+
+    record worker-version-filter {
+        comparator: filter-comparator,
+        value: i32
+    }
+
+    record worker-created-at-filter {
+        comparator: filter-comparator,
+        value: u64
+    }
+
+    record worker-env-filter {
+        name: string,
+        comparator: string-filter-comparator,
+        value: string
+    }
+
+    record worker-or-filter {
+        filters: list<worker-filter>
+    }
+
+    record worker-and-filter {
+        filters: list<worker-filter>
+    }
+
+    record worker-not-filter {
+        filter: worker-filter
+    }
+
+    variant worker-filter {
+        name(worker-name-filter),
+        status(worker-status-filter),
+        version(worker-version-filter),
+        created-at(worker-created-at-filter),
+        env(worker-env-filter),
+        and(worker-and-filter),
+        or(worker-or-filter),
+        not(worker-not-filter)
+    }
+
+    record worker-metadata {
+        worker-id: worker-id,
+        args: list<string>,
+        env: list<tuple<string, string>>,
+        status: worker-status,
+        template-version: i32,
+        retry-count: i32
+    }
+
     /// Create a new promise
     golem-create-promise: func() -> promise-id;
 
