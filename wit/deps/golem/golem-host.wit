@@ -112,18 +112,6 @@ interface host {
         value: string
     }
 
-    record worker-or-filter {
-        filters: list<worker-filter>
-    }
-
-    record worker-and-filter {
-        filters: list<worker-filter>
-    }
-
-    record worker-not-filter {
-        filter: worker-filter
-    }
-
     variant worker-property-filter {
         name(worker-name-filter),
         status(worker-status-filter),
@@ -132,7 +120,7 @@ interface host {
         env(worker-env-filter)
     }
 
-    variant worker-filters {
+    variant worker-filter {
         or(list<worker-property-filter>),
         and(list<worker-property-filter>)
     }
