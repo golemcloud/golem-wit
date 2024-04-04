@@ -98,7 +98,7 @@ interface host {
 
     record worker-version-filter {
         comparator: filter-comparator,
-        value: i32
+        value: s32
     }
 
     record worker-created-at-filter {
@@ -142,8 +142,8 @@ interface host {
         args: list<string>,
         env: list<tuple<string, string>>,
         status: worker-status,
-        template-version: i32,
-        retry-count: i32
+        template-version: s32,
+        retry-count: s32
     }
 
     record workers-metadata-response {
