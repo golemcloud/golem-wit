@@ -120,9 +120,12 @@ interface host {
         env(worker-env-filter)
     }
 
-    variant worker-filter {
-        or(list<worker-property-filter>),
-        and(list<worker-property-filter>)
+    record worker-all-filter {
+        filters: list<worker-property-filter>
+    }
+
+    record worker-any-filter {
+        filters: list<worker-all-filter>
     }
 
     record worker-metadata {
@@ -134,15 +137,10 @@ interface host {
         retry-count: s32
     }
 
-    record workers-metadata-response {
-        workers: list<worker-metadata>,
-        cursor: option<u64>
-    }
-
     resource get-workers {
-        constructor(template-id: template-id, filter: worker-filter, count: u64, precise: bool);
+        constructor(template-id: template-id, filter: option<worker-any-filter>, precise: bool);
 
-        get: func(cursor: u64) -> result<workers-metadata-response, string>;
+        get-next: func() -> result<option<list<worker-metadata>>, string>;
     }
 
     /// Create a new promise
