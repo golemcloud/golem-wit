@@ -140,7 +140,7 @@ interface host {
     resource get-workers {
         constructor(template-id: template-id, filter: option<worker-any-filter>, precise: bool);
 
-        get-next: func() -> result<option<list<worker-metadata>>, string>;
+        get-next: func() -> option<list<worker-metadata>>;
     }
 
     /// Create a new promise
