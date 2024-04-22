@@ -18,13 +18,13 @@ interface host {
 
     /// Represents a Golem worker
     record worker-id {
-        template-id: template-id,
+        component-id: component-id,
         worker-name: string
     }
 
 
-    /// Represents a Golem template
-    record template-id {
+    /// Represents a Golem component
+    record component-id {
         uuid: uuid,
     }
 
@@ -133,12 +133,12 @@ interface host {
         args: list<string>,
         env: list<tuple<string, string>>,
         status: worker-status,
-        template-version: u64,
+        component-version: u64,
         retry-count: u64
     }
 
     resource get-workers {
-        constructor(template-id: template-id, filter: option<worker-any-filter>, precise: bool);
+        constructor(component-id: component-id, filter: option<worker-any-filter>, precise: bool);
 
         get-next: func() -> option<list<worker-metadata>>;
     }
