@@ -28,6 +28,9 @@ interface host {
         uuid: uuid,
     }
 
+    /// Represents a Golem component's version
+    type component-version = u64;
+
     /// UUID
     record uuid {
       high-bits: u64,
@@ -51,6 +54,18 @@ interface host {
         persist-nothing,
         persist-remote-side-effects,
         smart
+    }
+
+    /// Describes how to update a worker to a different component version
+    enum update-mode {
+        /// Automatic update tries to recover the worker using the new component version 
+        /// and may fail if there is a divergence.
+        automatic,
+
+        /// Manual, snapshot-based update uses a user-defined implementation of the `save-snapshot` interface
+        /// to store the worker's state, and a user-defined implementation of the `load-snapshot` interface to
+        /// load it into the new version.
+        snapshot-based
     }
 
     enum filter-comparator {
@@ -208,6 +223,10 @@ interface host {
     /// i.e. not only is this key generated, but it is persisted and committed, such that the key can be used in third-party systems (e.g. payment processing)
     /// to introduce idempotence.
     generate-idempotency-key: func() -> uuid;
+
+    /// Initiates an update attempt for the given worker. The function returns immediately once the request has been processed,
+    /// not waiting for the worker to get updated.
+    update-worker:  func(worker-id: worker-id, target-version: component-version, mode: update-mode) -> ();
 }
 
 /// Interface providing user-defined snapshotting capability. This can be used to perform manual update of workers
