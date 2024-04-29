@@ -44,7 +44,7 @@ jobs:
       - name: Validate WIT
         run: | 
           cargo binstall --no-confirm wasm-tools@1.0.57
-          wasm-tools component wit -v info wit
+          wasm-tools component wit -vv wit
   publish:
     needs: [build]
     if: "startsWith(github.ref, 'refs/tags/v')"
