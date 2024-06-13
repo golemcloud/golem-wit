@@ -51,7 +51,7 @@ interface types {
     invoke-and-await: func(function-name: string, function-params: list<wit-value>) -> result<wit-value, rpc-error>;
     invoke: func(function-name: string, function-params: list<wit-value>) -> result<_, rpc-error>;
 
-    async-invoke-and-await: func(function-name: string, function-params: list<wit-value) -> future-invoke-result;
+    async-invoke-and-await: func(function-name: string, function-params: list<wit-value>) -> future-invoke-result;
   }
 
   resource future-invoke-result {
