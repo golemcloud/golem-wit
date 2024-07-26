@@ -42,8 +42,8 @@ jobs:
         run: cargo test
       - uses: cargo-bins/cargo-binstall@main
       - name: Validate WIT
-        run: | 
-          cargo binstall --no-confirm wasm-tools@1.0.57
+        run: |
+          cargo binstall --no-confirm wasm-tools@1.210.0
           wasm-tools component wit -vv wit
   publish:
     needs: [build]
