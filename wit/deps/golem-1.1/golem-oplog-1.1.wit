@@ -3,8 +3,9 @@ package golem:api@1.1.0-rc1;
 /// Host interface for enumerating and searching for worker oplogs
 interface oplog {
     use wasi:clocks/wall-clock@0.2.0.{datetime};
-    use golem:api/host@1.1.0-rc1.{account-id, component-version, oplog-index, retry-policy, worker-id};
     use golem:rpc/types@0.1.0.{wit-value};
+
+    use host.{account-id, component-version, oplog-index, retry-policy, worker-id};
 
     variant wrapped-function-type {
         /// The side-effect reads from the worker's local state (for example local file system,
