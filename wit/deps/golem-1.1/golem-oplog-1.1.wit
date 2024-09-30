@@ -232,7 +232,7 @@ interface oplog {
     }
 
     resource get-oplog {
-        constructor(worker-id: worker-id, from: oplog-index);
+        constructor(worker-id: worker-id, start: oplog-index);
         get-next: func() -> option<list<oplog-entry>>;
     }
 }
