@@ -1,7 +1,3 @@
-// UNSTABLE API - WILL BE CHANGING UNTIL THE GOLEM 1.1 RELEASE
-//
-// BACKWARD COMPATIBILITY GUARANTEES ARE NOT APPLIED TO WORKERS USING THIS HOST INTERFACE
-
 package golem:api@1.1.0-rc1;
 
 /// Host interface for enumerating and searching for worker oplogs
