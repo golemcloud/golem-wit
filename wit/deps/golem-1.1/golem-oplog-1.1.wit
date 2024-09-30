@@ -181,7 +181,7 @@ interface oplog {
         error(error-parameters),
         /// Marker entry added when get-oplog-index is called from the worker, to make the jumping behavior
         /// more predictable.
-        no-op(timestamp),
+        no-op(datetime),
         /// The worker needs to recover up to the given target oplog index and continue running from
         /// the source oplog index from there
         /// `jump` is an oplog region representing that from the end of that region we want to go back to the start and
@@ -196,7 +196,7 @@ interface oplog {
         change-retry-policy(change-retry-policy-parameters),
         /// Begins an atomic region. All oplog entries after `BeginAtomicRegion` are to be ignored during
         /// recovery except if there is a corresponding `EndAtomicRegion` entry.
-        begin-atomic-region(timestamp),
+        begin-atomic-region(datetime),
         /// Ends an atomic region. All oplog entries between the corresponding `BeginAtomicRegion` and this
         /// entry are to be considered during recovery, and the begin/end markers can be removed during oplog
         /// compaction.
@@ -204,7 +204,7 @@ interface oplog {
         /// Begins a remote write operation. Only used when idempotence mode is off. In this case each
         /// remote write must be surrounded by a `BeginRemoteWrite` and `EndRemoteWrite` log pair and
         /// unfinished remote writes cannot be recovered.
-        begin-remote-write(timestamp),
+        begin-remote-write(datetime),
         /// Marks the end of a remote write operation. Only used when idempotence mode is off.
         end-remote-write(end-remote-write-parameters),
         /// An invocation request arrived while the worker was busy
