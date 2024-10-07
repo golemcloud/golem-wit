@@ -42,6 +42,7 @@ interface oplog {
     record imported-function-invoked-parameters {
         timestamp: datetime,
         function-name: string,
+        request: wit-value,
         response: wit-value,
         wrapped-function-type: wrapped-function-type,
     }
