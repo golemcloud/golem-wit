@@ -24,7 +24,7 @@ interface oplog {
         /// writing a `BeginRemoteWrite` entry in the oplog. Followup invocations should contain
         /// this entry's index as the parameter. In batched remote writes it is the caller's responsibility
         /// to manually write an `EndRemoteWrite` entry (using `end_function`) when the operation is completed.
-        write-remote-batched(oplog-index)
+        write-remote-batched(option<oplog-index>)
     }
 
     record create-parameters {
