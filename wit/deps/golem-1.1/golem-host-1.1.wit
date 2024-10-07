@@ -56,7 +56,7 @@ interface host {
         /// Multiplier applied to the delay on each retry to implement exponential backoff
         multiplier: f64,
         /// The maximum amount of jitter to add to the delay
-        max-jitter-factory: option<f64>
+        max-jitter-factor: option<f64>
     }
 
     /// Configurable persistence level for workers
