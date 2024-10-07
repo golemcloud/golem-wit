@@ -89,7 +89,7 @@ interface oplog {
     record exported-function-invocation-parameters {
         idempotency-key: string,
         function-name: string,
-        input: list<wit-value>
+        input: option<list<wit-value>>
     }
 
     variant worker-invocation {
