@@ -228,6 +228,8 @@ interface oplog {
         describe-resource(describe-resource-parameters),
         /// The worker emitted a log message
         log(log-parameters),
+        /// The worker's has been restarted, forgetting all its history
+        restart(datetime)
     }
 
     resource get-oplog {
