@@ -50,7 +50,8 @@ interface oplog {
     record exported-function-invoked-parameters {
         timestamp: datetime,
         function-name: string,
-        request: list<wit-value>
+        request: list<wit-value>,
+        idempotency-key: string
     }
 
     record exported-function-completed-parameters {
