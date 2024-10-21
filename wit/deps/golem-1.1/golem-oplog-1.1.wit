@@ -238,7 +238,7 @@ interface oplog {
     }
 
     resource search-oplog {
-        constructor(worker-id: worker-id, text: string, from: option<oplog-index>);
+        constructor(worker-id: worker-id, text: string, older-than: option<oplog-index>);
         get-next: func() -> option<list<tuple<oplog-index, oplog-entry>>>;
     }
 }
