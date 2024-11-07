@@ -1,6 +1,6 @@
 [package]
 name = "golem-wit"
-version = "1.0.5" # FIXME
+version = "0.0.0"
 edition = "2021"
 license = "Apache-2.0"
 homepage = "https://golem.cloud"
