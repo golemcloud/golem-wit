@@ -44,7 +44,7 @@ interface oplog {
         parent: option<worker-id>,
         component-size: u64,
         initial-total-linear-memory-size: u64,
-        initial-active-plugins: list<plugin-reference>
+        initial-active-plugins: list<plugin-installation-description>
     }
 
     record imported-function-invoked-parameters {
@@ -127,7 +127,7 @@ interface oplog {
         timestamp: datetime,
         target-version: component-version,
         new-component-size: u64,
-        new-active-plugins: list<plugin-reference>
+        new-active-plugins: list<plugin-installation-description>
     }
 
     record failed-update-parameters {
@@ -180,12 +180,12 @@ interface oplog {
 
     record activate-plugin-parameters {
         timestamp: datetime,
-        plugin: plugin-reference
+        plugin: plugin-installation-description
     }
 
     record deactivate-plugin-parameters {
         timestamp: datetime,
-        plugin: plugin-reference
+        plugin: plugin-installation-description
     }
 
     variant oplog-entry {
