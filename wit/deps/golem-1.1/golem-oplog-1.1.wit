@@ -125,7 +125,7 @@ interface oplog {
         timestamp: datetime,
         target-version: component-version,
         new-component-size: u64,
-        new-active-parameter: list<plugin-reference>
+        new-active-plugins: list<plugin-reference>
     }
 
     record failed-update-parameters {
