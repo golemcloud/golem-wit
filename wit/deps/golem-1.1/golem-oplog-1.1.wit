@@ -5,7 +5,7 @@ interface oplog {
     use wasi:clocks/wall-clock@0.2.0.{datetime};
     use golem:rpc/types@0.1.0.{wit-value};
 
-    use host.{account-id, component-version, oplog-index, retry-policy, worker-id};
+    use host.{account-id, component-version, oplog-index, retry-policy, uuid, worker-id};
 
     variant wrapped-function-type {
         /// The side-effect reads from the worker's local state (for example local file system,
@@ -27,6 +27,13 @@ interface oplog {
         write-remote-batched(option<oplog-index>)
     }
 
+    record plugin-installation-description {
+        installation-id: uuid,
+        name: string,
+        version: string,
+        parameters: list<tuple<string, string>>
+    }
+
     record create-parameters {
         timestamp: datetime,
         worker-id: worker-id,
@@ -36,7 +43,8 @@ interface oplog {
         account-id: account-id,
         parent: option<worker-id>,
         component-size: u64,
-        initial-total-linear-memory-size: u64
+        initial-total-linear-memory-size: u64,
+        initial-active-plugins: list<plugin-installation-description>
     }
 
     record imported-function-invoked-parameters {
@@ -118,7 +126,8 @@ interface oplog {
     record successful-update-parameters {
         timestamp: datetime,
         target-version: component-version,
-        new-component-size: u64
+        new-component-size: u64,
+        new-active-plugins: list<plugin-installation-description>
     }
 
     record failed-update-parameters {
@@ -167,6 +176,16 @@ interface oplog {
         level: log-level,
         context: string,
         message: string
+    }
+
+    record activate-plugin-parameters {
+        timestamp: datetime,
+        plugin: plugin-installation-description
+    }
+
+    record deactivate-plugin-parameters {
+        timestamp: datetime,
+        plugin: plugin-installation-description
     }
 
     variant oplog-entry {
@@ -229,7 +248,11 @@ interface oplog {
         /// The worker emitted a log message
         log(log-parameters),
         /// The worker's has been restarted, forgetting all its history
-        restart(datetime)
+        restart(datetime),
+        /// Activates a plugin
+        activate-plugin(activate-plugin-parameters),
+        /// Deactivates a plugin
+        deactivate-plugin(deactivate-plugin-parameters)
     }
 
     resource get-oplog {
