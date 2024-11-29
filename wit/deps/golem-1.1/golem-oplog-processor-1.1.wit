@@ -14,7 +14,6 @@ interface oplog-processor {
     /// A processor resource is instantiated for each account having activated this oplog processor plugin.
     /// There are no guarantees for the number of processors running at the same time, and different entries from the same worker
     /// may be sent to different processor instances.
-    /// As workers can dynamically turn on/off the plugin, the list of entries received may not be a continous range.
     resource processor {
         /// Initializes an oplog processor for a given component where the plugin was installed to.
         /// The `account-info` parameters contains details of the account the installation belongs to.
