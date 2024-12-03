@@ -1,8 +1,4 @@
-// UNSTABLE API - WILL BE CHANGING UNTIL THE GOLEM 1.1 RELEASE
-//
-// BACKWARD COMPATIBILITY GUARANTEES ARE NOT APPLIED TO WORKERS USING THIS HOST INTERFACE
-
-package golem:api@1.1.0-rc1;
+package golem:api@1.1.0;
 
 /// The Golem host API provides low level access to Golem specific features such as promises and control over
 /// the durability and transactional guarantees the executor provides.
