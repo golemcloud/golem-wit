@@ -10,11 +10,23 @@ interface mysql {
     other(string)
   }
 
-  type date = tuple<s32, u8, u8>; // year, month, day
-  type time = tuple<u8, u8, u8, u32>; // hour, minute, second, nanosecond
-  type timestamp = tuple<s32, u8, u8, u8, u8, u8, u32>; // year, month, day, hour, minute, second, nanosecond
+  record date {
+    year: s32,
+    month: u8,
+    day: u8
+  }
 
-  type bit-vec = list<bool>;
+  record time {
+    hour: u8,
+    minute: u8,
+    second: u8,
+    nanosecond: u32
+  }
+
+  record timestamp {
+    date: date,
+    time: time
+  }
 
   variant db-column-type {
          boolean,
@@ -106,7 +118,7 @@ interface mysql {
        longblob(list<u8>),
        enumeration(string),
        set(string),
-       bit(bit-vec),
+       bit(list<bool>),
        json(string),
        null
 //        geometry,
