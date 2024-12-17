@@ -2,8 +2,6 @@ package wasi:rdbms@0.0.1;
 
 interface postgres {
 
-  type node-index = u32;
-
   variant error {
     connection-failure(string),
     query-parameter-failure(string),
@@ -136,29 +134,25 @@ interface postgres {
 
   record composite-type {
     name: string,
-    attributes: list<tuple<string, node-index>>
+    attributes: list<tuple<string, lazy-db-column-type>>
   }
 
   record composite {
     name: string,
-    values: list<node-index>
+    values: list<lazy-db-value>
   }
 
   record domain-type {
     name: string,
-    base-type: node-index
+    base-type: lazy-db-column-type
   }
 
   record domain {
     name: string,
-    value: node-index
+    value: lazy-db-value
   }
 
-  record db-column-type {
-    nodes: list<db-column-type-node>
-  }
-
-  variant db-column-type-node {
+  variant db-column-type {
     character,
     int2,
     int4,
@@ -198,10 +192,10 @@ interface postgres {
     enumeration(enumeration-type),
     composite(composite-type),
     domain(domain-type),
-    array(node-index)
+    array(lazy-db-column-type)
   }
 
-  variant db-value-node {
+  variant db-value {
     character(s8),
     int2(s16),
     int4(s32),
@@ -241,12 +235,18 @@ interface postgres {
     enumeration(enumeration),
     composite(composite),
     domain(domain),
-    array(list<node-index>),
+    array(list<lazy-db-value>),
     null
   }
 
-  record db-value {
-    nodes: list<db-value-node>
+  resource lazy-db-value {
+    create: static func(value: db-value) -> lazy-db-value;
+    get: func() -> db-value;
+  }
+
+  resource lazy-db-column-type {
+    create: static func(value: db-column-type) -> lazy-db-column-type;
+    get: func() -> db-column-type;
   }
 
   record db-column {
