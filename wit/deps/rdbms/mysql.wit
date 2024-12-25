@@ -126,7 +126,7 @@ interface mysql {
   }
 
   /// A potentially very large and lazy stream of rows:
-  resource db-result-set {
+  resource db-result-stream {
     get-columns: func() -> list<db-column>;
     get-next: func() -> option<list<db-row>>;
   }
@@ -134,7 +134,9 @@ interface mysql {
   resource db-connection {
     open: static func(address: string) -> result<db-connection, error>;
 
-    query: func(statement: string, params: list<db-value>) -> result<db-result-set, error>;
+    query-stream: func(statement: string, params: list<db-value>) -> result<db-result-stream, error>;
+
+    query: func(statement: string, params: list<db-value>) -> result<db-result, error>;
 
     execute: func(statement: string, params: list<db-value>) -> result<u64, error>;
 
