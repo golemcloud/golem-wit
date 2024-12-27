@@ -240,12 +240,12 @@ interface postgres {
   }
 
   resource lazy-db-value {
-    create: static func(value: db-value) -> lazy-db-value;
+    constructor(value: db-value);
     get: func() -> db-value;
   }
 
   resource lazy-db-column-type {
-    create: static func(value: db-column-type) -> lazy-db-column-type;
+    constructor(value: db-column-type);
     get: func() -> db-column-type;
   }
 
@@ -275,9 +275,9 @@ interface postgres {
   resource db-connection {
     open: static func(address: string) -> result<db-connection, error>;
 
-    query-stream: func(statement: string, params: list<db-value>) -> result<db-result-stream, error>;
-
     query: func(statement: string, params: list<db-value>) -> result<db-result, error>;
+
+    query-stream: func(statement: string, params: list<db-value>) -> result<db-result-stream, error>;
 
     execute: func(statement: string, params: list<db-value>) -> result<u64, error>;
 
@@ -286,6 +286,8 @@ interface postgres {
 
   resource db-transaction {
     query: func(statement: string, params: list<db-value>) -> result<db-result, error>;
+
+    query-stream: func(statement: string, params: list<db-value>) -> result<db-result-stream, error>;
 
     execute: func(statement: string, params: list<db-value>) -> result<u64, error>;
 
