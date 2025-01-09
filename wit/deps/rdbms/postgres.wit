@@ -54,33 +54,33 @@ interface postgres {
   }
 
   record int4range {
-   start: int4bound,
-   end: int4bound
+    start: int4bound,
+    end: int4bound
   }
 
   record int8range {
-   start: int8bound,
-   end: int8bound
+    start: int8bound,
+    end: int8bound
   }
 
   record numrange {
-   start: numbound,
-   end: numbound
+    start: numbound,
+    end: numbound
   }
 
   record tsrange {
-   start: tsbound,
-   end: tsbound
+    start: tsbound,
+    end: tsbound
   }
 
   record tstzrange {
-   start: tstzbound,
-   end: tstzbound
+    start: tstzbound,
+    end: tstzbound
   }
 
   record daterange {
-   start: datebound,
-   end: datebound
+    start: datebound,
+    end: datebound
   }
 
   record enumeration-type {
@@ -110,6 +110,27 @@ interface postgres {
   record domain {
     name: string,
     value: lazy-db-value
+  }
+
+  record range-type {
+    name: string,
+    base-type: lazy-db-column-type
+  }
+
+  variant value-bound {
+    included(lazy-db-value),
+    excluded(lazy-db-value),
+    unbounded
+  }
+
+  record values-range {
+    start: value-bound,
+    end: value-bound
+  }
+
+  record range {
+    name: string,
+    value: values-range
   }
 
   variant db-column-type {
@@ -152,7 +173,8 @@ interface postgres {
     enumeration(enumeration-type),
     composite(composite-type),
     domain(domain-type),
-    array(lazy-db-column-type)
+    array(lazy-db-column-type),
+    range(range-type)
   }
 
   variant db-value {
@@ -196,6 +218,7 @@ interface postgres {
     composite(composite),
     domain(domain),
     array(list<lazy-db-value>),
+    range(range),
     null
   }
 
