@@ -1,4 +1,4 @@
-package golem:rpc@0.1.0;
+package golem:rpc@0.1.1;
 
 interface types {
   use wasi:io/poll@0.2.0.{pollable};
@@ -32,6 +32,40 @@ interface types {
     prim-bool(bool),
     prim-string(string),
     handle(tuple<uri, u64>)
+  }
+
+  record wit-type {
+    nodes: list<wit-type-node>,
+  }
+
+  variant wit-type-node {
+    record-type(list<tuple<string, node-index>>),
+    variant-type(list<tuple<string, option<node-index>>>),
+    enum-type(list<string>),
+    flags-type(list<string>),
+    tuple-type(list<node-index>),
+    list-type(node-index),
+    option-type(node-index),
+    result-type(tuple<option<node-index>, option<node-index>>),
+    prim-u8-type,
+    prim-u16-type,
+    prim-u32-type,
+    prim-u64-type,
+    prim-s8-type,
+    prim-s16-type,
+    prim-s32-type,
+    prim-s64-type,
+    prim-f32-type,
+    prim-f64-type,
+    prim-char-type,
+    prim-bool-type,
+    prim-string-type,
+    handle-type
+  }
+
+  record value-and-type {
+    value: wit-value,
+    typ: wit-type
   }
 
   record uri {
