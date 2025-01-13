@@ -38,6 +38,13 @@ interface types {
     nodes: list<wit-type-node>,
   }
 
+  type resource-id = u64;
+
+  enum resource-mode {
+    owned,
+    borrowed
+  }
+
   variant wit-type-node {
     record-type(list<tuple<string, node-index>>),
     variant-type(list<tuple<string, option<node-index>>>),
@@ -60,7 +67,7 @@ interface types {
     prim-char-type,
     prim-bool-type,
     prim-string-type,
-    handle-type
+    handle-type(tuple<resource-id, resource-mode>)
   }
 
   record value-and-type {
