@@ -92,6 +92,9 @@ interface types {
     subscribe: func() -> pollable;
     get: func() -> option<result<wit-value, rpc-error>>;
   }
+
+  extract-value: func(vnt: value-and-type) -> wit-value;
+  extract-type: func(vnt: value-and-type) -> wit-type;
 }
 
 world wit-value {
