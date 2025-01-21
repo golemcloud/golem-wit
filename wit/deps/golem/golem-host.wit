@@ -233,9 +233,6 @@ interface host {
 
     /// Get worker metadata
     get-worker-metadata: func(worker-id: worker-id) -> option<worker-metadata>;
-
-    /// Fork a worker to another worker at a given oplog index
-    fork-worker: func(source-worker-id: worker-id, target-worker-id: worker-id, oplog-idx-cut-off: oplog-index) -> ();
 }
 
 /// Interface providing user-defined snapshotting capability. This can be used to perform manual update of workers
