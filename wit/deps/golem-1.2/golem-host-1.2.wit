@@ -1,4 +1,4 @@
-package golem:api/host@1.2.0;
+package golem:api@1.2.0;
 
 interface host {
   use golem:api/oplog@1.1.0.{worker-id, oplog-index};
