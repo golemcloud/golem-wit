@@ -42,7 +42,10 @@ interface durability {
     /// This is a pair of `begin-durable-function` and should be called after the durable function
     /// has performed and persisted or replayed its work. The `begin-index` should be the index
     /// returned by `begin-durable-function`.
-    end-durable-function: func(function-type: durable-function-type, begin-index: oplog-index);
+    ///
+    /// Normally commit behavior is decided by the executor based on the `function-type`. However, in special
+    /// cases the `forced-commit` parameter can be used to force commit the oplog in an efficient way.
+    end-durable-function: func(function-type: durable-function-type, begin-index: oplog-index, forced-commit: bool);
 
     /// Gets the current durable execution state
     current-durable-execution-state: func() -> durable-execution-state;
