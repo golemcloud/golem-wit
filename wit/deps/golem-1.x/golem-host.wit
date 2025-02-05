@@ -242,7 +242,7 @@ interface host {
     fork-worker: func(source-worker-id: worker-id, target-worker-id: worker-id, oplog-idx-cut-off: oplog-index) -> ();
 
     /// Schedule invocation of any worker for later
-    schedule-worker: func(
+    schedule-invocation: func(
         scheduled-time: datetime,
         worker-id: worker-id,
         function-name: string,
