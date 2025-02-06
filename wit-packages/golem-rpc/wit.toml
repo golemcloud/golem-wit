@@ -1,4 +1,0 @@
-version = "0.1.0"
-
-[dependencies]
-"wasi:io" = "0.2.0"
