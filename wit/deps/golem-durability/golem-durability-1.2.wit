@@ -1,9 +1,9 @@
 /// NOTE: NOT FINALIZED YET
-package golem:durability@1.2.0;
+package golem:durability@2.0.0;
 
 interface durability {
-    use golem:api/host@1.2.0.{persistence-level};
-    use golem:api/oplog@1.2.0.{oplog-index, wrapped-function-type};
+    use golem:api/host@2.0.0.{persistence-level};
+    use golem:api/oplog@2.0.0.{oplog-index, wrapped-function-type};
     use wasi:clocks/wall-clock@0.2.0.{datetime};
     use golem:rpc/types@0.1.1.{value-and-type};
 
