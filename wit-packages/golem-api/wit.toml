@@ -1,0 +1,6 @@
+version = "1.1.0"
+
+[dependencies]
+"wasi:io" = "0.2.0"
+"golem:rpc" = { path = "../golem-rpc" }
+"wasi:clocks" = "0.2.0"
