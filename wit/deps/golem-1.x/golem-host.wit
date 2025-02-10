@@ -1,4 +1,4 @@
-package golem:api@1.1.2;
+package golem:api@1.1.3;
 
 /// The Golem host API provides low level access to Golem specific features such as promises and control over
 /// the durability and transactional guarantees the executor provides.
@@ -164,6 +164,14 @@ interface host {
         get-next: func() -> option<list<worker-metadata>>;
     }
 
+    /// Target parameter for the `revert-worker` operation
+    variant revert-worker-target {
+        /// Revert to a specific oplog index. The given index will be the last one to be kept.
+        revert-to-oplog-index(oplog-index),
+        /// Revert the last N invocations.
+        revert-last-invocations(u64)
+    }
+
     /// Create a new promise
     create-promise: func() -> promise-id;
 
@@ -239,6 +247,9 @@ interface host {
 
     /// Fork a worker to another worker at a given oplog index
     fork-worker: func(source-worker-id: worker-id, target-worker-id: worker-id, oplog-idx-cut-off: oplog-index) -> ();
+
+    /// Revert a worker to a previous state
+    revert-worker: func(worker-id: worker-id, revert-target: revert-worker-target);
 }
 
 /// Interface providing user-defined snapshotting capability. This can be used to perform manual update of workers
