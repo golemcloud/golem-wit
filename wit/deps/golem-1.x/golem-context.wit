@@ -7,6 +7,12 @@ interface context {
     /// Starts a new `span` with the given name, as a child of the current invocation context
     start-span: func(name: string) -> span;
 
+    /// Gets the current invocation context
+    ///
+    /// The function call captures the current context; if new spans are started, the returned `invocation-context` instance will not
+    /// reflect that.
+    current-context: func() -> invocation-context;
+
     /// Represents a unit of work or operation
     resource span {
         /// Gets the starting time of the span
