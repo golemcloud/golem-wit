@@ -1,3 +1,5 @@
+package golem:api@1.1.5;
+
 /// Invocation context support
 interface context {
     use wasi:clocks/wall-clock@0.2.0.{datetime};
@@ -49,6 +51,9 @@ interface context {
 
         /// Gets all values of all attributes of the current invocation context.
         get-attribute-chains: func() -> list<attribute-chain>;
+
+        /// Gets the W3C Trace Context headers associated with the current invocation context
+        trace-context-headers: func() -> list<tuple<string, string>>;
     }
 
     /// An attribute of a span
