@@ -13,6 +13,12 @@ interface context {
     /// reflect that.
     current-context: func() -> invocation-context;
 
+    /// Allows or disallows forwarding of trace context headers in outgoing HTTP requests
+    ///
+    /// Returns the previous value of the setting
+    allow-forwarding-trace-context-headers: func(allow: bool) -> bool;
+
+
     /// Represents a unit of work or operation
     resource span {
         /// Gets the starting time of the span
