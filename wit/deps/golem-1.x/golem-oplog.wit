@@ -81,7 +81,7 @@ interface oplog {
         request: list<wit-value>,
         idempotency-key: string,
         trace-id: trace-id,
-        span-id: span-id,
+        trace-states: list<string>,
         /// The first one is the invocation context stack associated with the exported function invocation,
         /// and further stacks can be added that are referenced by the `linked-context` field of `local-span-data`
         invocation-context: list<list<span-data>>
