@@ -127,9 +127,6 @@ interface types {
   resource cancellation-token {
     cancel: func();
   }
-
-  extract-value: func(vnt: value-and-type) -> wit-value;
-  extract-type: func(vnt: value-and-type) -> wit-type;
 }
 
 world wit-value {
