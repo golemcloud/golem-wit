@@ -96,7 +96,7 @@ interface types {
     async-invoke-and-await: func(function-name: string, function-params: list<wit-value>) -> future-invoke-result;
 
     /// Schedule invocation for later
-    schedule-invocation: func(scheduled-time: datetime, function-name: string, function-params: list<wit-value>) -> ();
+    schedule-invocation: func(scheduled-time: datetime, function-name: string, function-params: list<wit-value>);
     /// Schedule invocation for later. Call cancel on the returned resource to cancel the invocation before the scheduled time.
     schedule-cancelable-invocation: func(scheduled-time: datetime, function-name: string, function-params: list<wit-value>) -> cancellation-token;
   }
@@ -107,7 +107,7 @@ interface types {
   }
 
   resource cancellation-token {
-    cancel: func() -> ();
+    cancel: func();
   }
 
   extract-value: func(vnt: value-and-type) -> wit-value;
