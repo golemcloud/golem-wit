@@ -1,10 +1,10 @@
-package golem:api@1.1.5;
+package golem:api@1.1.6;
 
 /// The Golem host API provides low level access to Golem specific features such as promises and control over
 /// the durability and transactional guarantees the executor provides.
 interface host {
-    use golem:rpc/types@0.1.3.{uri, wit-value};
     use wasi:clocks/monotonic-clock@0.2.0.{duration};
+    use golem:rpc/types@0.2.0.{component-id, uuid, worker-id};
 
     /// An index into the persistent log storing all performed operations of a worker
     type oplog-index = u64;
@@ -16,25 +16,8 @@ interface host {
         oplog-idx: oplog-index,
     }
 
-    /// Represents a Golem worker
-    record worker-id {
-        component-id: component-id,
-        worker-name: string
-    }
-
-    /// Represents a Golem component
-    record component-id {
-        uuid: uuid,
-    }
-
     /// Represents a Golem component's version
     type component-version = u64;
-
-    /// UUID
-    record uuid {
-      high-bits: u64,
-      low-bits: u64
-    }
 
     /// Represents a Golem Cloud account
     record account-id {
@@ -273,9 +256,6 @@ interface host {
     /// Get the worker-id for a given component and worker name.
     /// Returns none when no component for the specified component-reference or no worker with the specified worker-name exists.
     resolve-worker-id-strict: func(component-reference: string, worker-name: string) -> option<worker-id>;
-
-    /// Construct an uri for a given worker id.
-    worker-uri: func(worker-id: worker-id) -> uri;
 }
 
 /// Interface providing user-defined snapshotting capability. This can be used to perform manual update of workers
