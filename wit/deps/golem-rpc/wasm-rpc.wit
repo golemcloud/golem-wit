@@ -22,10 +22,10 @@ interface types {
   }
 
   /// Parses a UUID from a string
-  parse-uuid(uuid: string): result<uuid, string>;
+  parse-uuid: func(uuid: string) -> result<uuid, string>;
 
   /// Converts a UUID to a string
-  uuid-to-string(uuid: uuid): string;
+  uuid-to-string: func(uuid: uuid) -> string;
 
   type node-index = s32;
 
