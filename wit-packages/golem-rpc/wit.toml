@@ -1,4 +1,8 @@
-version = "0.1.0"
+version = "0.2.0"
+
+[registries]
+default = "https://wa.dev"
 
 [dependencies]
-"wasi:io" = "0.2.0"
+"wasi:io" = { path = "../io" }
+"wasi:clocks" = { path = "../clocks" }
