@@ -1,6 +1,7 @@
-version = "1.1.6"
+version = "1.2.0"
 
 [dependencies]
-"wasi:io" = { path = "../io" }
+"golem:api" = { path = "../golem-api" }
 "golem:rpc" = { path = "../golem-rpc" }
 "wasi:clocks" = { path = "../clocks" }
+"wasi:io" = { path = "../io" }
