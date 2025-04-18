@@ -85,10 +85,14 @@ interface durability {
     /// was created with `persist-typed-durable-function-invocation`
     read-persisted-typed-durable-function-invocation: func() -> persisted-typed-durable-function-invocation;
 
-    /// Creates a `pollable` that is never ready until it gets attached to a real `pollable` implementation
-    /// using `set-lazy-initialized-pollable`.
-    create-lazy-initialized-pollable: func() -> pollable;
+    resource lazy-initialized-pollable {
+        /// Creates a `pollable` that is never ready until it gets attached to a real `pollable` implementation
+        /// using `set-lazy-initialized-pollable`.
+        constructor();
 
-    /// Sets the underlying `pollable` for a pollable created with `create-lazy-initialized-pollable`.
-    set-lazy-initialized-pollable: func(lazy-pollable: borrow<pollable>, actual-pollable: borrow<pollable>);
+        /// Sets the underlying `pollable` for a pollable created with `create-lazy-initialized-pollable`.
+        set: func(pollable: borrow<pollable>);
+
+        subscribe: func() -> pollable;
+    }
 }
