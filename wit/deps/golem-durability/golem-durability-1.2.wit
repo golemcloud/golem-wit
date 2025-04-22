@@ -91,7 +91,7 @@ interface durability {
         constructor();
 
         /// Sets the underlying `pollable` for a pollable created with `create-lazy-initialized-pollable`.
-        set: func(pollable: borrow<pollable>);
+        set: func(pollable: pollable);
 
         subscribe: func() -> pollable;
     }
