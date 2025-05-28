@@ -17,10 +17,12 @@ pub const WASI_IO: &[(&str, &str)] = &[
 pub const WASI_CLOCKS_WALL_CLOCK_WIT: &str = include_str!("../wit/deps/clocks/wall-clock.wit");
 pub const WASI_CLOCKS_MONOTONIC_CLOCK_WIT: &str =
     include_str!("../wit/deps/clocks/monotonic-clock.wit");
+pub const WASI_CLOCKS_TIMEZONE_WIT: &str = include_str!("../wit/deps/clocks/timezone.wit");
 pub const WASI_CLOCKS_WORLD_WIT: &str = include_str!("../wit/deps/clocks/world.wit");
 
 pub const WASI_CLOCKS: &[(&str, &str)] = &[
     ("wall-clock.wit", WASI_CLOCKS_WALL_CLOCK_WIT),
     ("monotonic-clock.wit", WASI_CLOCKS_MONOTONIC_CLOCK_WIT),
+    ("timezone.wit", WASI_CLOCKS_TIMEZONE_WIT),
     ("world.wit", WASI_CLOCKS_WORLD_WIT),
 ];
