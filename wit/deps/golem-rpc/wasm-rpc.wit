@@ -1,4 +1,4 @@
-package golem:rpc@0.2.1;
+package golem:rpc@0.2.2;
 
 interface types {
   use wasi:clocks/wall-clock@0.2.3.{datetime};
@@ -114,7 +114,7 @@ interface types {
     constructor(worker-id: worker-id);
     ephemeral: static func(component-id: component-id) -> wasm-rpc;
 
-    invoke-and-await: func(function-name: string, function-params: list<wit-value>) -> result<wit-value, rpc-error>;
+    invoke-and-await: func(function-name: string, function-params: list<wit-value>) -> result<option<wit-value>, rpc-error>;
     invoke: func(function-name: string, function-params: list<wit-value>) -> result<_, rpc-error>;
 
     async-invoke-and-await: func(function-name: string, function-params: list<wit-value>) -> future-invoke-result;
@@ -127,7 +127,7 @@ interface types {
 
   resource future-invoke-result {
     subscribe: func() -> pollable;
-    get: func() -> option<result<wit-value, rpc-error>>;
+    get: func() -> option<result<option<wit-value>, rpc-error>>;
   }
 
   resource cancellation-token {
