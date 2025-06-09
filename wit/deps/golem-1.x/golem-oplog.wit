@@ -346,9 +346,7 @@ interface oplog {
         /// Committed transaction operation, indicating that the transaction was committed
         commited-remote-transaction(remote-transaction-parameters),
         /// Rolled back transaction operation, indicating that the transaction was rolled back
-        rolled-back-remote-transaction(remote-transaction-parameters),
-        /// Aborted transaction operation, indicating that the transaction failed
-        aborted-remote-transaction(remote-transaction-parameters)
+        rolled-back-remote-transaction(remote-transaction-parameters)
     }
 
     resource get-oplog {
