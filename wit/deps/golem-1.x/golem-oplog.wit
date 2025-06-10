@@ -344,7 +344,7 @@ interface oplog {
         /// Pre-Rollback of the transaction, indicating that the transaction will be rolled back
         pre-rollback-remote-transaction(remote-transaction-parameters),
         /// Committed transaction operation, indicating that the transaction was committed
-        commited-remote-transaction(remote-transaction-parameters),
+        committed-remote-transaction(remote-transaction-parameters),
         /// Rolled back transaction operation, indicating that the transaction was rolled back
         rolled-back-remote-transaction(remote-transaction-parameters)
     }
