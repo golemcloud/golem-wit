@@ -127,7 +127,7 @@ interface host {
         status(worker-status-filter),
         version(worker-version-filter),
         created-at(worker-created-at-filter),
-        env(worker-env-filter)
+        env(worker-env-filter),
         wasi-config-vars(worker-wasi-config-vars-filter)
     }
 
