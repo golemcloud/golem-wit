@@ -274,6 +274,12 @@ interface host {
     /// and this worker continues running as well. The return value is going to be different in this worker and
     /// the forked worker.
     fork: func(new-name: string) -> fork-result;
+
+    /// Registers a guest owned resource as an resource indexed by its parameters.
+    register-resource: func(parameters: list<wit-value>, handle: wit-value);
+
+    /// Unregisters a resource previously registered by `register-resource`, identified by its parameters.
+    unregister-resource: func(parameters: list<wit-value>);
 }
 
 /// Interface providing user-defined snapshotting capability. This can be used to perform manual update of workers
