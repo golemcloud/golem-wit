@@ -276,10 +276,17 @@ interface host {
     fork: func(new-name: string) -> fork-result;
 
     /// Registers a guest owned resource as an resource indexed by its parameters.
-    register-resource: func(parameters: list<value-and-type>, handle: value-and-type);
+    /// `parameters` is a list of typed values representing the constructor parameter values of the resource
+    /// `resource-owner` is the resource type's owner WIT package and interface. If it is just a single interface name, the component's root package is assumed.
+    /// `resource-name` is the name of the resource type.
+    /// `resource-handle` is the resource's handle.
+    register-resource: func(parameters: list<value-and-type>, resource-owner: string, resource-name: string, resource-handle: u32);
 
     /// Unregisters a resource previously registered by `register-resource`, identified by its parameters.
-    unregister-resource: func(parameters: list<value-and-type>, handle: value-and-type);
+    /// `parameters` is a list of typed values representing the constructor parameter values of the resource
+    /// `resource-owner` is the resource type's owner WIT package and interface. If it is just a single interface name, the component's root package is assumed.
+    /// `resource-name` is the name of the resource type.
+    unregister-resource: func(parameters: list<value-and-type>, resource-owner: string, resource-name: string);
 }
 
 /// Interface providing user-defined snapshotting capability. This can be used to perform manual update of workers
